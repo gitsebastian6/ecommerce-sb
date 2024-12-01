@@ -1,0 +1,41 @@
+kind: Service 
+apiVersion: v1 
+metadata: 
+  name: ecommerce-k8s
+  labels:
+    app: ecommerce-k8s
+spec:
+  type: LoadBalancer
+  selector:
+    app: ecommerce-k8s
+  ports:
+    - port: 80
+      targetPort: 8002
+      name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-k8s
+  labels:
+    app: ecommerce-k8s
+spec:
+  selector:
+    matchLabels:
+      octopusexport: OctopusExport
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ecommerce-k8s
+        octopusexport: OctopusExport
+    spec:
+      containers:
+      - name: ecommerce-k8s
+        image: ecommerce-k8s:1.0
+        ports:
+          - name: http
+            containerPort: 8002
+            protocol: TCP
