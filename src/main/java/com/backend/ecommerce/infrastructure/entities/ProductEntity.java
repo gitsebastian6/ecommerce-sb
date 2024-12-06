@@ -26,8 +26,8 @@ import lombok.Data;
 @Table(name = "product")
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id = UUID.randomUUID();
     private String code;
     private String name;
     private String characteristic;

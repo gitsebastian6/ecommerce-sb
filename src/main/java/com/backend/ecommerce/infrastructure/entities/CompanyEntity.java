@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.backend.ecommerce.domain.models.Company;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,8 +34,9 @@ public class CompanyEntity {
     private String name;
     private String address;
     private String phone;
-    @OneToMany()
-    @JoinColumn(name="company_id")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    @JsonIgnore // Ignora los productos al serializar
     private List<ProductEntity> products;
 
     public CompanyEntity(Long nit, String name, String address, String phone) {

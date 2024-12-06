@@ -43,7 +43,8 @@ public class CreateProductUseCaseImpl implements CreateProductRepo{
     public void createProduct(ProductSaveDTO saveProductDTO) {
         List<CategoryEntity> listCategories = new ArrayList<CategoryEntity>();
         List<PriceEntity> listPrices = new ArrayList<PriceEntity>();
-        CompanyEntity findCompany = companyServicePort.getById(saveProductDTO.getCompanyId()).orElseThrow();
+        CompanyEntity findCompany = companyServicePort.getById(saveProductDTO.getCompanyId())
+        .orElseThrow(() -> new CompanyNotFoundException("bb7f0616-9c0c-4e11-befb-1b3bdd6b7f65" + saveProductDTO.getCompanyId() + " no fue encontrada"));
         for (UUID category : saveProductDTO.getCategories()) {
             listCategories.add(categoryServicePort.getById(category).orElseThrow());
         }

@@ -14,5 +14,5 @@ public class SaveCompanyDTO {
     private String name;
     private String address;
     private String phone;
-    private List<ProductEntity> products;
+    private List<ProductEntity> products; 
 }
